@@ -90,7 +90,7 @@ print("shape:",shape(dataMat)," type:",type(dataMat)) #2000个三维数据点
 
 lamda,f=laplaEigen(dataMat,11,5.0) #得到拉普拉斯矩阵的特征值和特征向量
 
-fm,fn =shape(f) #特征向量矩阵，fm为特征向量维度，fn为特征向量个数
+fm,fn =shape(f) #特征向量矩阵，fm为特征向量维度，fn为特征向量个数，2000*2000
 
 print ('fm,fn:',fm,fn)
 
@@ -100,18 +100,19 @@ first=0
 
 second=0
 
-print (lamdaIndicies[0], lamdaIndicies[1]) #前两个最小特征值的索引：0，1
+print (lamdaIndicies[0], lamdaIndicies[1]) #前两个最小特征值的索引
 
 for i in range(fm): #维度
 
     # .real为获取实部
     if lamda[lamdaIndicies[i]].real>1e-5:
 
-        print (lamda[lamdaIndicies[i]])
+        print ("lamda:",lamda[lamdaIndicies[i]],"lamda index:",lamdaIndicies[i])
 
-        first=lamdaIndicies[i]
+        #前两个最小特征值的索引
+        first = lamdaIndicies[i]
 
-        second=lamdaIndicies[i+1]
+        second = lamdaIndicies[i+1]
 
         break
 
@@ -127,12 +128,11 @@ ax1 = fig.add_subplot(111, projection='3d')
 #参数说明：x集合、y集合和z集合
 ax1.scatter(dataMat[:, 0], dataMat[:, 1], dataMat[:, 2], c=color,cmap=plt.cm.Spectral)
 
-
 fig=plt.figure('lowdata')
 
 ax2 = fig.add_subplot(111)
 
 ax2.scatter(f[:,first].tolist(), f[:,second].tolist(), c=color, cmap=plt.cm.Spectral)
 
-plt.show()
 
+plt.show()
